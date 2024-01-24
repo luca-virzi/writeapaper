@@ -11,7 +11,7 @@ jobs:
     env:
       # Edit here with the names of your latex file and directory (can use ".")
       DIR: draft/Thesis_Fact
-      FILE: thesis.tex
+      FILE: thesis
     steps:
       - name: Checkout
         uses: actions/checkout@v2
