@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Edit here with the names of your latex file and directory (can use ".")
-      DIR: draft/Thesis_Fact
+      DIR: draft/Thesis_Fact/
       FILE: thesis
     steps:
       - name: Checkout
