@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Edit here with the names of your latex file and directory (can use ".")
-      DIR: draft
-      FILE: thesis
+      DIR: draft/SU3_Latent_Heat
+      FILE: latent_heat
     steps:
       - name: Checkout
         uses: actions/checkout@v2
