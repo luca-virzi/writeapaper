@@ -1,0 +1,39 @@
+\chapter{Polynomial approximation of $1/z$}
+\label{app:approx}
+The Chebyshev's polynomials offer an asymptotically valid approximation of $1/z$ when $z$ lies within an ellipse which does not contain the origin (see Ref. \cite{Manteuffel1977, doi:10.1137/1.9780898718003}).
+When $z$ is contained in an ellipse centered at a distance $d$ from the origin on the positive real axis, with major and minor radii $a$ and $b$ respectively, and with focus distance $c = \sqrt{a^2 - b^2}$, the polynomial approximation of $1/z$ of order $N$ is given by:
+\begin{equation}
+    P_N (z) \equiv \frac{1 - R_{N+1}(z)}{z} = c_N \prod_{k = 1}^N (z - z_k)
+\end{equation}
+where the residual is given by:
+\begin{equation}\label{remainder}
+    R_{N+1}(z) \equiv \frac{T_{N+1(\frac{d-z}{c})}}{T_{N+1}(\frac{d}{c})}
+\end{equation}
+with $T_k(z)$ being the Chebyshev polynomial of the first kind of degree $k$. The $N$ roots of $P_N(z)$ are obtained by requiring that $R_{N+1}(0) = 1$, and they're given by:
+\begin{equation}\label{roots}
+    z_k = d\left(1 - \cos(\frac{2\pi k}{N+1}) \right) - i \sqrt{d^2 - c^2} \sin(\frac{2\pi k}{N+1}) \hspace{5mm} k = 1, \dots, N
+\end{equation}
+The roots lie on an ellipse with center $d$, foci in $d \pm c$ and passes through the origin, with support in the complex plane.
+From the definition of the Chebyshev polynomials, a uniform error bound on the approximation is given by:
+\begin{equation}
+    \abs{1 - zP_N(z)} = \abs{R_{N+1}(z)} \leq \left( \frac{a + \sqrt{a^2 - c^2}}{d + \sqrt{d^2 - c^2}} \right)^{N+1} \Biggl\{ 1 + \left[ \frac{a}{c} + \left( \frac{a^2}{c^2} - 1 \right)^{1/2} \right]^{-2N - 2} \Biggr\}
+\end{equation}
+
+\section{Roots on a circle}
+If we take $c \to 0$, the roots of the polynomial $P_N(z)$ lie on a circle centered in $d$ and with radius $a = b$. The remainder simply becomes:
+\begin{equation}
+    \abs{R_{N+1}(z)} = \abs{\frac{d - z}{d}}^{N+1}
+\end{equation}
+and the uniform error bound on the approximation becomes:
+\begin{equation}
+    \abs{1 - zP_N(z)} = \abs{R_{N+1}(z)} \leq \left(\frac{a}{d} \right)^{N+1}
+\end{equation}
+The roots of the polynomial can be found by plugging $c = 0$ into Eq. \eqref{roots}, hence they form a circle with center in $d$ which passes by the origin (hence its radius is $d$). If we choose $d + a = 1$ and define the spectral gap as $d - a = \varepsilon$, we get:
+\begin{equation}
+    \abs{1 - zP_N(z)} = \abs{R_{N+1}(z)} \leq \left(\frac{a}{d} \right)^{N+1} = \left(\frac{1 - \varepsilon}{1 + \varepsilon}\right)^{N+1}
+\end{equation}
+If we the spectral gap is small $\varepsilon \ll 1$:
+\begin{equation}
+    \left(\frac{1 - \varepsilon}{1 + \varepsilon}\right)^{N+1} \sim e^{-2\varepsilon(N+1)}
+\end{equation}
+the polynomial approximation converges exponentially in $N$ with a rate proportional to $2\varepsilon$.

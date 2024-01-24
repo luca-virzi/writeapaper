@@ -1,0 +1,299 @@
+%CLASSE DOCUMENTO - LINGUA E DIMENSIONE FONT
+\documentclass[corpo=11pt,english,numerazioneromana]{toptesi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% INCLUSIONE PACCHETTI
+\usepackage[classica]{topfront}
+\usepackage[utf8]{inputenc} %utf8
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{blindtext}
+\usepackage{graphicx,wrapfig}
+\usepackage{booktabs}
+\usepackage{lmodern}
+\usepackage{varioref}
+\usepackage{url}
+\usepackage{array}
+\usepackage{paralist}{\obeyspaces\global\let =\space}
+\usepackage{verbatim}
+\usepackage{subfig}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{accents}
+\usepackage{slashed}
+\usepackage{amsfonts}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage[pass]{geometry}
+\usepackage[figuresright]{rotating}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{bbold}
+\usepackage[babel]{csquotes}
+\usepackage{hyperref}
+\usepackage{braket}
+\usepackage{mathtools}
+\usepackage{subfig}
+\usepackage{setspace}
+\graphicspath{ {images/} }
+\usepackage[sorting=none,style=numeric-comp,backend=biber]{biblatex}
+\usepackage{tikz}
+\usepackage{mathdots}
+\usepackage{yhmath}
+\usepackage{cancel}
+\usepackage{color}
+\usepackage{siunitx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{tabularx}
+\usepackage{extarrows}
+\usepackage{booktabs}
+\usetikzlibrary{fadings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{shapes}
+
+ \DeclareUnicodeCharacter{202F}{FIX ME!!!!}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% CONFIGURAZIONE LINK E RIFERIMENTI
+\hypersetup{%
+    pdfpagemode={UseOutlines},
+    bookmarksopen,
+    pdfstartview={FitH},
+    colorlinks,
+    linkcolor={black}, %COLORE DEI RIFERIMENTI AL TESTO
+    citecolor={blue}, %COLORE DEI RIFERIMENTI ALLE CITAZIONI
+    urlcolor={blue} %COLORI DEGLI URL
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% CONFIGURAZIONE LISTATI/CODICE - CANCELLARE SE NON NECESSARIO
+% PYTHON - BIANCO E NERO
+\lstset{%
+	captionpos=b,
+	language=Python,
+	basicstyle =\small\ttfamily,
+	keywordstyle=\color{black}\bfseries,
+	breaklines=true,
+	breakatwhitespace=true,
+	frame=lines,
+	numbers=left,
+	numberstyle=\footnotesize,
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% FRENCHSPACING ABILITATO - CANCELLARE PER SPAZIATURA ALL'INGLESE
+\frenchspacing
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%DEFINIZIONE SEZIONI IN NUMERAZIONE ROMANA
+%ELENCO DEI LISTATI/CODICI
+\makeatletter
+\newcommand\listofcodes{%
+ \iffrontmatter\else\frontmattertrue\fi
+ \if@openright\cleardoublepage\else\clearpage\fi
+ % change the meaning of \chapter in a group
+ \begingroup\def\chapter##1{\@schapter}
+ \phantomsection % for the hyperlink
+ \addcontentsline{toc}{chapter}{Listings}
+ \lstlistoflistings 
+ \endgroup
+} 
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% INFORMAZIONI PDF - PERSONALIZZARE
+\pdfinfo{%
+  /Title    (Factorization of the fermionic determinant in Lattice Field Theories)
+  /Author   (Luca Virzì)
+  /Subject  (Proposal for an alternive procedure applied to the Schwinger Model)
+  /Keywords (Lattice lat-hep)
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% LISTA DEI CAPITOLI DA INCLUDERE - PERSONALIZZARE
+\includeonly{%
+chap_intro, %
+chap_schwinger, %
+chap_obs,%
+chap_fact,%
+chap_newfact,
+conclusion,
+app_a,%
+app_b,%
+app_wdop,%
+app_lu,
+app_approx,
+}
+
+% FILE DI BIBLIOGRAFIA
+\addbibresource{bibliography.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% INIZIO DOCUMENTO
+\begin{document}
+\english
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% FRONTESPIZIO - PERSONALIZZARE
+% ELIMINATE LE VOCI CHE NON VI SERVONO
+
+% UNIVERSITA - NOME
+\ateneo{Università degli Studi Milano-Bicocca}
+
+% FACOLTA - DICITURA
+\FacoltaDi{Dipartimento di Fisica "Giuseppe Occhialini"}
+
+% CORSO DI LAUREA - DICITURA (MANTENERE LO SPAZIO)
+\CorsoDiLaureaIn{Corso di Laurea Magistrale in}
+% CORSO DI LAUREA - NOME
+\corsodilaurea{Fisica}
+
+% LOGO UNIVERSITA
+\logosede{logo-bicocca.pdf}
+
+% TIPOLOGIA TESI
+\TesiDiLaurea{Tesi di Laurea Magistrale}
+
+% TITOLO
+\titolo{Factorization of the fermionic determinant in Lattice Field Theories}
+
+% SOTTOTITOLO
+\sottotitolo{Proposal for an alternative procedure applied to the Schwinger Model}
+
+% RELATORE/I - DICITURA
+\AdvisorName{Relatore:}
+% RELATORE - PROF. NOME E COGNOME
+\relatore{Prof.\ Michele Pepe}
+% RELATORE AGGIUNTIVO - PROF NOME E COGNOME
+% SE SI HA SOLO UN RELATORE ELIMINARE E CAMBIARE Advisors in Advisor
+\secondorelatore{Prof.\ Leonardo Giusti}
+
+% CANDIDATO - DICITURA (MANTENERE I DUE PUNTI)
+\CandidateName{Candidato:}
+% SECONDO CANDIDATO - ELIMINARE O DECOMMENTARE
+%secondocandidato{Bombo de Bombis}
+
+% CANDIDATO - NOME E COGNOME
+\candidato{Luca Virzì \\ Matricola: 850345}
+
+
+% DATA - MESE ANNO
+\sedutadilaurea{Marzo 2023 - A.A. 2021/22}
+
+\frontespizio
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%INTERLINEA - DEFAULT 1 - NON ESAGERATE, NON SUPERATE MAI 1.3 ;)
+%\interlinea{1.2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+% CITAZIONE - PERSONALIZZARE
+% VSPACE - PROPORZIONE USATA PER CENTRATURA VERTICALE DEL TESTO
+% FLUSHRIGHT - ALLINEAMENTO ORIZZONTALE A DESTRA
+\vspace*{\stretch{1}}
+\begin{flushright}
+\noindent
+%To anyone who struggled in this system based on competition \\
+%you will not go unheard
+%e intanto tutti fanno strada \\
+%stando fermi al posto loro
+%\vspace{5 mm}
+%\\ Giallorenzo
+%\textit{Niccolò Contessa}
+\end{flushright}
+\vspace*{\stretch{6}}
+\cleardoublepage
+
+
+
+% ABSTRACT - PERSONALIZZARE
+\sommario
+The definition of quantum field theories on lattice is the only approach that allows us to explore their non-perturbative features in a formal way from first principles. This possibility becomes fundamental for instance for Quantum Chromodynamics (QCD), the quantum field theory which describes strong interactions, as it is characterised by asymptotic freedom. Namely, its coupling constant $\alpha_S$ becomes larger at smaller energy scales, making it impossible to study the theory perturbatively in this regime. The non-perturbative definition of QCD is indeed given by the continuum limit, at infinite volume, of the theory regolarized on lattice (Lattice QCD, LQCD).
+\\ In the last decades the interest towards lattice field theories arose alongside a simultaneous exploit of our computational and numerical capabilities: if it is true that computers engineering knew an extraordinary progress in this time span, it is also undeniable that the state of art of computational Physics fondly relied on the design of better algorithms for the implementation of such theories.
+\\ Monte Carlo algorithms consolidated as the most solid technique for the simulation of lattice field theories, in particular its variant called \textit{Hybrid Monte Carlo} (HMC), where the time evolution is deterministic and obeys the dynamics coming from the equations of motion of the system. 
+\\ If Monte Carlo algorithms have been widely used for the implementation of pure gauge theories, numerical limits rise up when dynamical fermions come into the game, and one of the fondest challenges in this research branch consists in how to overcome those limits. The implementation of dynamical quarks indeed results in an additive term in the effective bosonic action of the system, the \textit{fermionic determinant}, which depends on gauge fields defined across the whole lattice and is consequently highly non-local.
+\\ The worst consequence of this non-locality consists in the so-called \textit{exponential problem}, namely most hadronic correlation functions suffer from an exponential deterioration of the signal-to-noise ratio. This in turn implies that, in order to reach an adequate fixed statistical precision, the required computational costs grow exponentially, making simulations unfeasible in reasonable times for observables at great distances. 
+\\ Recently in literature it was proposed that a possible way to tackle down this problem consists in the factorization of the fermionic determinant, which alongside the factorization of fermionic observables led to the first \textit{multi-level algorithms} for theories with dynamical quarks. The main ingredient of this procedure is the domain decomposition of the lattice into sub-lattices with independent dynamics, where the action can be written as a local functional of the block fields. More specificly, the lattice gets decomposed in overlapping blocks, so that the contributions to the correlation function coming from non-local terms are suppressed exponentially when the thickness of the overlapping region is increased. In this way, the exponential problem reduces to a polynomial one. 
+\\ In this work we present an alternative procedure for the factorization of the quark determinant with respect to the one currently present in literature, where the decomposition in overlapping domains is substituted by a complete block-separation of the system dynamics.
+\\ Once that also the factorization of fermionic observables will be formalized, we will compare the numerical effectiveness of this new algorithm, and since the computational costs required to perform a test in the framework of Lattice QCD would be exaggerated for our goal, the first verification will be carried on on a simpler system, namely the Schwinger Model (QED$_2$), which shares some computational features with LQCD.
+\\ Given this consideration, this work started with the design of an HMC algorithm for the Standard Schwinger Model from scratches, where standard means that domain decomposition was not introduced. After a discussion of the equations of motions which drive the system dynamics, we present some numerical tests on the algorithmic efficiency of our code. Next we focus on the effectiveness of some stochastic estimators for fermionic observables, namely \textit{noise vectors}, whose implementation is crucial in more demanding simulations. Consequently we proceed with the computation of the correlation functions needed for the inspection of the low-lying spectrum of the theory, given by iso-triplet and iso-singlet states (in analogy with QCD$_4$), and in particular we focus on its behaviour towards the chiral limit.
+\\ These results will be useful to test the efficiency of the algorithm in which the new factorization procedure will be implemented, whose realization represents our next goal. Finally, in order to support the theoretical validity of our proposal, we present the results of a numerical test for the factorization procedure conducted on a gauge configuration extrapolated from the aforementioned code.
+%Abstract, pleased to meet you. Ah, it's not funny anymore.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% INDICI - ELIMINARE GLI INDICI NON NECESSARI
+
+% INDICE GENERALE
+\tableofcontents
+
+% INDICE DELLE FIGURE
+\listoffigures
+
+% INDICE DELLE TABELLE
+\listoftables
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\mainmatter
+
+% INCLUSIONE FILE CAPITOLI - PERSONALIZZARE - TENERE COERENTE CON LISTA IN ALTO
+\include{chap_intro}
+\include{chap_schwinger.tex}
+\include{chap_obs.tex}
+\include{chap_fact}
+\include{chap_newfact}
+\include{conclusion}
+\appendix
+% INCLUSIONE APPENDICI - - PERSONALIZZARE - TENERE COERENTE CON LISTA IN ALTO
+\include{app_a}
+\include{app_b.tex}
+\include{app_wdop}
+\include{app_lu}
+\include{app_approx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% BIBLIOGRAFIA
+\phantomsection
+\addcontentsline{toc}{chapter}{\refname}
+\nocite{*}
+\printbibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% RINGRAZIAMENTI - PERSONALIZZARE
+%\ringraziamenti
+%Since I may have missed someone, I deeply thank anyone I thought of writing about in these lines, it means that somehow I needed them or thought about them at a given moment, and I am glad I did, since I am not interested in achieving anything by myself, on my own.
+%\\ At first, I would like to thank my advisor, professor Michele Pepe, whose brilliant idea about factorization is the reason why this document exists, and throughout these months showed me a glimpse of what it feels like to work in this fascinating research field. At the same time, I would like to thank my co-advisor professor Leonardo Giusti, for following my work with interest, and doctor Mitsuaki Hirasawa, whose kindness guaranteed a light-hearted collaboration on this thesis during its most convoluted stages. 
+%\\ I would like to thank the Milano-Bicocca section of INFN and CINECA for granting me access to HPC clusters.
+%\\ I will never thank enough Pietro, who has been dealing with my silly questions about Physics and with my wandering talks for years, I am lucky to have as a friend someone I admire that much. The same holds for Andrea and Francesco, I really hope that one day our plan to reciprocally boost our h-index through fake citations comes to life. Finally, our group wouldn't be complete without Aiki, who showed us how our friendship hasn't been affected by distance. 
+%\\ A special thanks goes to Emanuele and Francesco, as we learned together how to alternate long and loud conversations to silent communications unintelligible to others. \\ I sincerely thank Margherita for blessing me with countless inspiring conversations, and with the vision of \textit{Close Up} by Abbas Kiarostami. Thanks to my lovely polecule of fools, where anyone can truly be themselves. 
+%\\ Thanks to Giorgio, Diego, Filippo and Tommaso for all the eclectic moments we lived together, to Filippo C., who I am glad to have known better in the %last months, and to all the foggy windows I tried to belong to.
+%\\ An heartful mention goes to my family: as I grew older I started to understand how we gave each other what we were able to offer at different times, and how indeed affection was always there.
+%\\ Finally, I owe some gratitude to Giallorenzo, the technical glitch of italian music, for being the reason why my friends barely let me play any song at parties.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

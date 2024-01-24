@@ -1,0 +1,38 @@
+\chapter{$\mathcal{O}(a)$-improved Wilson-Dirac operator}
+\label{app: Wilson improved op}
+
+The massive $\mathcal{O}(a)$-improved Wilson-Dirac operator is defined as \cite{L_scher_2013, L_scher_1996, SHEIKHOLESLAMI1985572}:
+\begin{equation}\label{dirac improved}
+    D = D_{\textrm{w}} + \delta D_{\textrm{v}} + \delta D_{\textrm{b}} + m_0
+\end{equation}
+where $m_0$ is the bare quark mass, and $D_{\textrm{w}}$ is the massless Wilson-Dirac operator:
+\begin{equation}
+    D_{\textrm{w}} = \frac{1}{2}\{\gamma_\mu \left(\nabla^*_\mu + \nabla_\mu \right) - \nabla^*_\mu \nabla_\mu\}
+\end{equation}
+with $\gamma_\mu$ being the Dirac matrices, and the summation over repeated indices is understood.
+\\ We define the covariant forward and backward derivatives $\nabla_\mu$ and $\nabla^*_\mu$ as:
+\begin{equation}
+    \nabla_\mu \psi(x) = U_\mu(x) \psi(x + \hat{\mu}) - \psi(x) \hspace{8mm} \nabla^*_\mu \psi(x) = \psi(x) -  U^\dagger_\mu(x - \hat{\mu}) \psi(x - \hat{\mu}) - \psi(x)
+\end{equation}
+where $\psi(x)$ is a generic fermion field, $U_\mu(x)$ are the link fields and $\hat{\mu}$ is the unit vector defined along the direction $\mu$.
+The other terms that appear in \eqref{dirac improved} are called boundary correction terms, and they are defined as:
+\begin{equation}
+    \begin{split}
+       & \delta D_{\textrm{v}} \psi(x) = c_{\textrm{SW}} \frac{i}{4} \sigma_{\mu\nu} \hat{F}_{\mu\nu}(x) \psi(x) \\
+        & \delta D_{\textrm{b}} \psi(x) = \{ (c_{\textrm{F}} - 1)\delta_{x_0, 1} + c'_{\textrm{F}} - 1)\delta_{x_0, T-1} \} \psi(x)
+    \end{split}
+\end{equation}
+and with open boundary conditions in the time direction, $c_{\textrm{F}} = c'_{\textrm{F}}$. In the previous expression we defined the tensorial structure $\sigma_{\mu\nu} = \frac{i}{2}\left[\gamma_\mu, \gamma_\nu \right]$, and $\hat{F}_{\mu\nu}$, which is a discretization of the field strength tensor given by:
+\begin{equation}
+    \hat{F}_{\mu\nu} = \frac{1}{8} \{ Q_{\mu\nu}(x) - Q_{\nu\mu}(x)\}
+\end{equation}
+with:
+\begin{equation}
+    \begin{split}
+        Q_{\mu\nu}(x) & = U_\mu(x) U_\nu(x + \hat{\mu}) U_\mu^\dagger(x + \hat{\nu}) U_\nu^\dagger(x) + \\
+        & + U_\nu(x) U^\dagger_\mu(x - \hat{\mu} + \hat{\nu}) U_\nu^\dagger(x - \hat{\mu}) U_\mu(x - \hat{\mu}) + \\
+        & +  U^\dagger_\mu(x - \hat{\mu}) U^\dagger_\nu(x - \hat{\mu} - \hat{\nu}) U_\mu(x - \hat{\mu} - \hat{\nu}) U_\nu(x - \hat{\nu}) + \\
+        & +  U^\dagger_\nu(x - \hat{\nu}) U_\mu(x - \hat{\nu}) U_\nu(x + \hat{\mu} - \hat{\nu}) U^\dagger_\mu(x)
+    \end{split}
+\end{equation}
+In the block decomposition of the Dirac operator, we will refer to $Q = \gamma_5 D$, which is Hermitian since $D$ satisfies the $\gamma_5$-hermiticity relation $D = \gamma_5 D^\dagger \gamma_5$.

@@ -1,0 +1,270 @@
+\chapter{Drift Force Computation}
+\label{app:b}
+In this subsection we will compute the driving force of the leapfrog evolution scheme, which is given by:
+\begin{equation*}
+\begin{split}
+    \pdv{S[U]}{Q_0(x)} &= \beta \Im{U_P(x) - U_P(x - \hat{1})} - 2 \Re{\eta^\dagger(y) \left(\pdv{D}{Q_0(x)}D^\dagger\right) (y,z)\, \eta(z)}   \\
+    \pdv{S[U]}{Q_1(x)} &= \beta \Im{- U_P(x) + U_P(x - \hat{0})} - 2 \Re{\eta^\dagger(y) \left(\pdv{D}{Q_1(x)}D^\dagger\right) (y,z)\, \eta(z)} 
+\end{split}
+\end{equation*}
+The gauge part is trivial, so we will focus on the second term of the previous expression.
+\subsubsection*{Step-by-Step Computation}
+Given the definition of $D^\dagger$ in (\ref{D daga}), we can compute: 
+\begin{equation}\label{ddagger eta}
+\begin{split}
+        D^\dagger_{p,n} \eta_n &= \left(D^\dagger \eta \right)_p = \\
+        & = \Bar{m} \eta_p - \frac{1}{2}\left[ (1 - \gamma_0) U_0^\dagger(p - \hat{0}) \eta_{p-\hat{0}} + (1 + \gamma_0) U_0 (p) \eta_{p+\hat{0}} \right] - \\
+        & \,\,\,\,\,\,\,\,\,\,\, \,\,\,\,\,\,\, \, - \frac{1}{2}\left[ (1 - \gamma_1) U_1^\dagger(p - \hat{1}) \eta_{p-\hat{1}} + (1 + \gamma_1) U_1 (p) \eta_{p + \hat{1}}\right]
+\end{split}
+\end{equation} 
+Then, from the definition of the Dirac operator (\ref{D}), if we update a phase $Q_\mu (k)$ defined at the reticular site $k$ we get:
+\begin{equation}\label{deriv D}
+    \pdv{D_{m,p}}{Q_\mu(k)} = - \frac{i}{2} \left[ (1 - \gamma_\mu)U_\mu(k) \delta_{m,k} \delta_{p, k + \hat{\mu}} - (1 + \gamma_\mu) U_\mu^\dagger(k)\delta_{m - \hat{\mu}, k} \delta_{p, k}  \right]
+\end{equation}
+We need to contract this expression with $\eta^\dagger_m$ on the left and $(D^\dagger \eta)_p$ on the right.
+For $\mu = 0$:
+\begin{equation}\label{force0}
+    \begin{split}
+        \eta^\dagger \left( \pdv{D}{Q_0(k)} \right) D^\dagger \eta = &- \frac{i}{2} \Bar{m} \left[ \eta^\dagger_k (1 - \gamma_0) U_0 (k) \eta_{k + \hat{0}} - \eta_{k + \hat{0}} (1 + \gamma_0) U_0^\dagger(k)\eta_k \right] + \\
+         & + \frac{i}{2} \left[ \eta^\dagger_k (1 - \gamma_0) \eta_k - \eta^\dagger_{k + \hat{0}} (1 + \gamma_0) \eta_{k + \hat{0}} \right] - \\
+        & + \frac{i}{4} U_0(k) \eta_k^\dagger \left[ (1-\gamma_0)(1 - \gamma_1) U_1^\dagger(k + \hat{0} - \hat{1}) \eta_{k + \hat{0} -\hat{1}} + \right.  \\ 
+        & \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, \left. + (1 - \gamma_0)(1 + \gamma_1) U_1 (k + \hat{0}) \eta_{k + \hat{0} + \hat{1}} \right] - \\
+        & - \frac{i}{4} U_0^\dagger(k) \eta_{k + \hat{0}}^\dagger \left[(1+\gamma_0)(1 - \gamma_1) U_1^\dagger(k-\hat{1}) \eta_{k - \hat{1}} +  \right. \\
+        & \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, \left. + (1 + \gamma_0)(1 + \gamma_1) U_1 (k) \eta_{k + \hat{1}} \right]
+    \end{split}
+\end{equation}
+And finally:
+\begin{equation}
+    \begin{split}
+                2 \Re{\eta^\dagger \left( \pdv{D}{Q_0(k)} \right) D^\dagger \eta} = & \Im \left(\Bar{m} \left[ \eta^\dagger_k (1 - \gamma_0) U_0 (k) \eta_{k + \hat{0}} - \eta^\dagger_{k + \hat{0}} (1 + \gamma_0) U_0^\dagger(k)\eta_k \right] + \right. \\
+         & - \left[ \eta^\dagger_k (1 - \gamma_0) \eta_k - \eta^\dagger_{k + \hat{0}} (1 + \gamma_0) \eta_{k + \hat{0}} \right] - \\
+        & - \frac{1}{2} U_0(k) \eta_k^\dagger \left[ (1-\gamma_0)(1 - \gamma_1) U_1^\dagger(k + \hat{0} - \hat{1}) \eta_{k + \hat{0} -\hat{1}} + \right.  \\ 
+        & \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, \left. + (1 - \gamma_0)(1 + \gamma_1) U_1 (k + \hat{0}) \eta_{k + \hat{0} + \hat{1}} \right] - \\
+        & + \frac{1}{2} U_0^\dagger(k) \eta_{k + \hat{0}}^\dagger \left[(1+\gamma_0)(1 - \gamma_1) U_1^\dagger(k-\hat{1}) \eta_{k - \hat{1}} +  \right. \\
+        & \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, \left. \left. + (1 + \gamma_0)(1 + \gamma_1) U_1 (k) \eta_{k + \hat{1}} \right]\right)
+    \end{split}
+\end{equation}
+After contracting the $\gamma$ matrices, using a notation where $\eta_1(k)$ labels the first component of the pseudofermion $\eta$ defined at the lattice site $k$, we obtain:
+\begin{equation}
+    \begin{split}
+         2 \Re{\eta^\dagger \left( \pdv{D}{Q_0(k)} \right) D^\dagger \eta} = & \Im \left( 2 \Bar{m} \left[U_0 (k) \eta_1^*(k)\eta_1(k + \hat{0}) - U_0^\dagger(k) \eta_2^*(k + \hat{0})\eta_2(k) \right] - \right. \\
+         & - 2 \left[ \eta_1^*(k) \eta_1(k) - \eta_2^*(k + \hat{0}) \eta_2(k + \hat{0}) \right] - \\
+        & - U_0(k) \eta_1^*(k) \left[ U_1^\dagger(k + \hat{0} - \hat{1}) \eta_-(k + \hat{0} - \hat{1}) + \right.  \\ 
+        & \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, \left. + U_1(k + \hat{0}) \eta_+ (k + \hat{0} + \hat{1}) \right] + \\
+        & + U_0^\dagger(k) \eta_{2}^*(k + \hat{0}) \left[ U_1(k) \eta_+ (k + \hat{1}) - U_1^\dagger(k - \hat{1}) \eta_{-}(k - \hat{1})  \right]
+    \end{split}
+\end{equation}
+where:
+\begin{equation*}
+    \eta_-(k) = \eta_1 (k) - \eta_2(k) \,\,\,\,\,\,\,\,\,\,\, \eta_+(k) = \eta_1 (k) + \eta_2 (k)
+\end{equation*}
+\\ Analogously, for $\mu = 1$:
+\begin{equation}
+    \begin{split}
+                2 \Re{\eta^\dagger \left( \pdv{D}{Q_1(k)} \right) D^\dagger \eta} = & \Im \left(\Bar{m} \left[ \eta^\dagger_k (1 - \gamma_1) U_1 (k) \eta_{k + \hat{1}} - \eta^\dagger_{k + \hat{1}} (1 + \gamma_1) U_1^\dagger(k)\eta_k \right] + \right. \\
+         & -  \left[ \eta^\dagger_k (1 - \gamma_1) \eta_k - \eta^\dagger_{k + \hat{1}} (1 + \gamma_1) \eta_{k + \hat{1}} \right] - \\
+        & - \frac{1}{2} U_1(k) \eta_k^\dagger \left[ (1-\gamma_1)(1 - \gamma_0) U_0^\dagger(k + \hat{1} - \hat{0}) \eta_{k + \hat{1} -\hat{0}} + \right.  \\ 
+        & \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, \left. + (1 - \gamma_1)(1 + \gamma_0) U_0 (k + \hat{1}) \eta_{k + \hat{1} + \hat{0}} \right] - \\
+        & + \frac{1}{2} U_1^\dagger(k) \eta_{k + \hat{1}}^\dagger \left[(1+\gamma_1)(1 - \gamma_0) U_0^\dagger(k-\hat{0}) \eta_{k - \hat{0}} +  \right. \\
+        & \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, \left. \left. + (1 + \gamma_1)(1 + \gamma_0) U_0 (k) \eta_{k + \hat{0}} \right]\right)
+    \end{split}
+\end{equation}
+and after we use the explicit form of the $\gamma$ matrices:
+\begin{equation}
+    \begin{split}
+         2 \Re{\eta^\dagger \left( \pdv{D}{Q_1(k)} \right) D^\dagger \eta} = & \Im \left( \Bar{m} \left[U_1 (k) \eta_-^*(k)  \eta_-(k + \hat{1}) - U_1^\dagger(k) \eta_+^*(k + \hat{1}) \eta_+(k) \right] - \right. \\
+         & -  \left[ \eta_-^*(k) \eta_-(k) - \eta_+^*(k + \hat{1}) \eta_+ (k + \hat{1}) \right] - \\
+        & - U_1(k) \eta_-^*(k) \left[ U_0^\dagger ( k + \hat{1} - \hat{0} ) \eta_1 (k + \hat{1} - \hat{0}) - \right.  \\ 
+        & \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, \left. - U_0(k + \hat{1}) \eta_2 (k + \hat{1} + \hat{0}) \right] + \\
+        & + U_1^\dagger(k) \eta_{+}^*(k + \hat{1}) \left[ U_0(k) \eta_2 (k + \hat{0}) + U_0^\dagger(k - \hat{0}) \eta_{1}(k - \hat{0})  \right]
+    \end{split}
+\end{equation}
+where:
+\begin{equation*}
+    \eta_-^*(k) = \eta_1^* (k) - \eta_2^* (k) \,\,\,\,\,\,\,\,\,\,\, \eta_+^*(k) = \eta_1^* (k) + \eta_2^* (k)
+\end{equation*}
+\vspace{5mm}
+\\Alternatively, if we recall that $D^\dagger = \gamma_2 D \gamma_2$, we can write:
+\begin{equation*}
+    \eta^\dagger \left(\pdv{D D^\dagger}{Q_\mu(k)}\right) \eta = 2 \Re{\eta^\dagger \pdv{\mathcal{D}}{Q_\mu(k)} \mathcal{D}\eta}
+\end{equation*}
+where $\mathcal{D} = D\gamma_2$. Then it is useful to define:
+\begin{equation}
+    \psi = \mathcal{D}\eta = D \gamma_2 \eta = D \mqty(-i \eta_2 \\ i \eta_1) = D \eta'
+\end{equation}
+From (\ref{deriv D}) it is easy to show that:
+\begin{equation}\label{deriv Dcal}
+    \pdv{\mathcal{D}_{m,p}}{Q_\mu(k)} = - \frac{i}{2} \left[ (1 - \gamma_\mu) \gamma_2 U_\mu(k) \delta_{m,k} \delta_{p, k + \hat{\mu}} - (1 + \gamma_\mu) \gamma_2 U_\mu^\dagger(k)\delta_{m - \hat{\mu}, k} \delta_{p, k}  \right]
+\end{equation}
+Therefore, we need the contraction:
+\begin{equation}
+\begin{split}
+        \eta^\dagger (m) \pdv{\mathcal{D}_{m,p}}{Q_\mu(k)} \psi(p) =& - \frac{i}{2} \left[\eta^\dagger(k) (1 - \gamma_\mu) \gamma_2 U_\mu(k) \psi(k + \hat{\mu}) \right. \\ & \left. \hspace{20mm} - \eta^\dagger(k + \hat{\mu}) (1 + \gamma_\mu) \gamma_2 U_\mu^\dagger(k) \psi(k)  \right]
+\end{split}
+\end{equation}
+Hence the drift force from the pseudofermion action is:
+\begin{equation}
+    \begin{split}
+        \pdv{S_{pf}}{Q_0(k)} = & - 2 \Re{\eta^\dagger \left( \pdv{\mathcal{D}}{Q_0(k)} \right) \psi} = \\
+        = & \Re{i\left[ -2i \eta^*_1(k) U_0(k) \psi_2(k + \hat{0}) - 2i \eta^*_2(k + \hat{0}) U_0^\dagger(k)\psi(k) \right]} = \\
+        = & 2 \Re{\eta^*_1(k) U_0(k) \psi_2(k + \hat{0}) + \eta^*_2(k + \hat{0}) U_0^\dagger(k) \psi_1(k)}
+    \end{split}
+\end{equation}
+and analogously: 
+\begin{equation}
+    \begin{split}
+        \pdv{S_{pf}}{Q_1(k)} = & - 2 \Re{\eta^\dagger \left( \pdv{\mathcal{D}}{Q_1(k)} \right) \psi} = \\
+        = & \Re\left[-U_1(k) \left[ \left(\eta^*_2(k) - \eta^*_1(k)\right) \left(\psi_1(k + \hat{1}) + \psi_2(k + \hat{1})\right) \right] + \right. \\
+        & \hspace{10 mm} + \left. U_1^\dagger(k) \left[ \left( \eta_1^*(k + \hat{1} + \eta_2^*(k + \hat{1}) \right) \left( \psi_1(k) - \psi_2(k) \right) \right] \right]
+    \end{split}
+\end{equation}
+
+\section{Conjugate Gradient Algorithm}
+In order to evaluate the drift force of the time evolution, we need to compute the combination $\eta(x) = (DD^\dagger)^{-1} \phi(x)$, hence we will need an algorithm for matrix inversion. \\ The Conjugate Gradient (CG) algorithm for SPD matrices \cite{Hestenes1952MethodsOC} allows us to find an approximation of the solution $x$ of the linear system $Ax = b$, and in our case $A = DD^{\dagger}$ and $b = \phi$. This algorithm falls into the category of the Krylov Subspaces based techniques, and it consists of the following steps:
+\begin{enumerate}
+    \item Define an initial guess for $\eta = x$, called $x^{(0)}$, drawn accordingly to a Gaussian distribution.
+    \item Compute the initial residual $r^{(0)} = \phi - Ax^{(0)}$ (with $A = DD^\dagger$) and the direction $d^{(0)} = r^{(0)}$. 
+    \item Compute iteratively $x^{(k+1)}$, $r^{(k+1)}$, $d^{(k+1)}$, with $k = 0, 1, 2, \dots$ using some two-terms recursion, until the desired accuracy is achieved. In particular:
+    \begin{equation}
+        x^{(k+1)} = x^{(k)} + \alpha^{(k)}d^{(k)}
+    \end{equation}
+    where $\alpha^{(k)}$ is a parameter defined as:
+    \begin{equation}
+        \alpha^{(k)} \equiv \frac{r^{(k)\dagger} r^{(k)}}{d^{(k)\dagger}\, Ad^{(k)}}
+    \end{equation}
+    Then:
+    \begin{equation}
+        r^{(k+1)} = r^{(k)} - \alpha^{(k)} Ad^{(k)}
+    \end{equation}
+    And finally:
+    \begin{equation}
+        d^{(k+1)} = r^{(k+1)} + \beta^{(k)} d^{(k)}
+    \end{equation}
+    where $\beta^{(k)}$ is a parameter defined as:
+    \begin{equation}
+        \beta^{(k)} \equiv \frac{r^{(k+1)\dagger} r^{(k+1)}}{r^{(k)\dagger}\, r^{(k)}}
+    \end{equation}
+\end{enumerate}
+\begin{algorithm}
+\caption{ConjugateGradient (pseudo $x$, gauge $u$, pseudo $\phi$)}\label{alg:cap}
+\begin{algorithmic}
+\State Draw $x$ Gaussian;
+\State $r_k = \phi - Ax$;
+\State $d = r_k$;
+\State Compute residual res = $(r_k, r_k)$;
+\While{res $ > \varepsilon $}
+\State Compute $Ad$;
+\State $\alpha = (r_k, r_k)/(d, Ad)$;
+\State $x = x + \alpha \, d$;
+\State $r_{k+1} = r_k - \alpha \, Ad$;
+\State $\beta = (r_{k+1}, r_{k+1})/(r_k, r_k)$;
+\State $d = r_{k+1} + \beta\,d $;
+\State Compute residual res = $(r_{k+1}, r_{k+1})$;
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+To embed this algorithm, we need to evaluate $A d^{(k)}$ and $A x^{(0)}$, where $A = DD^{\dagger}$. Since $d^{(k)}$ and $x^{(0)}$ share the same vectorial structure (they are identical to pseudofermion fields), we can build a routine to compute such a contraction.
+\subsubsection*{Step-by-Step Computation}
+To implement the first step of the algorithm, we need the explicit form of the components of a pseudofermion field $\phi(n)$ defined at the lattice site $n$. It is simply given by the application of the Dirac operator on an auxiliary field $\chi$, which has the same structure as $\phi.$
+\begin{equation*}
+    \phi(n) = \mqty(\phi_1(n) \\ \phi_2(n)) \hspace{20 mm} \chi(n) = \mqty(\chi_1(n) \\ \chi_2(n))
+\end{equation*}
+Using the definition in (\ref{D}):
+\begin{equation}
+\begin{split}
+        \phi(m) & = D(m, n) \chi(n) = \\
+        & = \Bar{m} \chi(m) - \frac{1}{2} \left[ (1 - \gamma_0)U_0(m) \chi(m + \hat{0}) + (1 + \gamma_0) U_0^\dagger(m - \hat{0}) \chi(m - \hat{0}) \right] - \\
+        & - \frac{1}{2} \left[ (1 - \gamma_1)U_1(m) \chi(m + \hat{1}) + (1 + \gamma_1) U_1^\dagger(m - \hat{1}) \chi(m - \hat{1}) \right]
+\end{split}
+\end{equation}
+which gives:
+\begin{equation}
+    \begin{split}
+        \phi_1(m) &= \Bar{m} \chi_1(m) - U_0(m) \chi_1 (m + \hat{0}) - \frac{1}{2} U_1(m) \left( \chi_1(m + \hat{1}) - \chi_2 (m + \hat{1}) \right) - \\
+        & - \frac{1}{2} U_1^\dagger(m - \hat{1}) \left( \chi_1 (m - \hat{1}) + \chi_2 (m - \hat{1}) \right)
+    \end{split}
+\end{equation}
+\begin{equation}
+    \begin{split}
+        \phi_2(m) &= \Bar{m} \chi_2(m) - U_0^\dagger(m - \hat{0}) \chi_2 (m - \hat{0}) - \frac{1}{2} U_1(m) \left( - \chi_1(m + \hat{1}) + \chi_2 (m + \hat{1}) \right) - \\
+        & - \frac{1}{2} U_1^\dagger(m - \hat{1}) \left( \chi_1 (m - \hat{1}) + \chi_2 (m - \hat{1}) \right)
+    \end{split}
+\end{equation}
+where $\Bar{m} = m_0 + 2$, and the $\gamma$-matrices are defined in (\ref{gammas}).
+\\ Consider now a generic field $d(n)$ defined at the lattice site $n$:
+\begin{equation*}
+    d(n) = \mqty(d_1(n) \\ d_2(n))
+\end{equation*}
+If we apply $D^\dagger$ (we understood the fermionic indices $\alpha$ and $\beta$):
+\begin{equation}\label{ddagger d}
+\begin{split}
+        D^\dagger(p,n) d(n) & = \left( \Bar{m} \delta_{n, p} - \frac{1}{2}\left[(1-\gamma_0) U_0^\dagger( p - \hat{0})\delta_{n, p - \hat{0}} + (1 + \gamma_0) U_0 (p) \delta_{n, p + \hat{0}} \right]  - \right. \\ 
+        & - \left. \frac{1}{2}\left[(1-\gamma_1) U_1^\dagger(p - \hat{1})\delta_{n, p - \hat{1}} + (1 + \gamma_1) U_1 (p) \delta_{n, p + \hat{1}} \right]   \right) d(n) = \\
+        & = \Bar{m}\,d(p) - \frac{1}{2}\left[ (1 - \gamma_0) U_0^\dagger(p - \hat{0})\,d(p-\hat{0}) + (1 + \gamma_0) U_0 (p)\,d(p+\hat{0}) \right] - \\
+        & - \frac{1}{2}\left[ (1 - \gamma_1) U_1^\dagger(p - \hat{1})\,d(p-\hat{1}) + (1 + \gamma_1) U_1 (p)\,d(p+\hat{1}) \right]
+\end{split}
+\end{equation}
+Now we can compute the contraction:
+\begin{equation*}
+    \begin{split}
+        D(m, p)(D^\dagger d)(p) =& \left(\Bar{m} \delta_{m,p} - \frac{1}{2}\sum_{\mu} \left[ (1 - \gamma_\mu) U_\mu(m) \delta_{p, m + \hat{\mu}} + (1 + \gamma_\mu) U_\mu^\dagger (m - \mu) \delta_{p, m - \hat{\mu}} \right]\right) \cdot \\
+        & \cdot \left( \Bar{m} d(p) - \frac{1}{2}\left[ (1 - \gamma_0) U_0^\dagger(p - \hat{0}) d(p-\hat{0}) + (1 + \gamma_0) U_0 (p) d(p+\hat{0}) \right] - \right. \\ 
+        & \hspace{15 mm} \left. - \frac{1}{2}\left[ (1 - \gamma_1) U_1^\dagger(p - \hat{1}) d(p-\hat{1}) + (1 + \gamma_1) U_1 (p) d(p+\hat{1}) \right] \right)
+    \end{split}
+\end{equation*}
+Which can be written as:
+\begin{equation*}
+        \begin{split}
+       & (DD^\dagger d)(m) = \Bar{m}^2 d(m) - \Bar{m}\left[ U_0^\dagger(m - \hat{0}) \mqty(d_1(m-\hat{0}) \\ 0 ) + U_0(m) \mqty(0 \\ d_2(m+\hat{0})) \right] - \\ 
+       & \hspace{15 mm} - \frac{1}{2} \Bar{m} \left[ U_1^{\dagger}(m-\hat{1}) \mqty(d_1 (m-\hat{1}) - d_2(m-\hat{1}) \\ - d_1(m-\hat{1}) + d_2 (m-\hat{1}) ) + U_1(m) \mqty( d_1(m + \hat{1})  + d_2(m + \hat{1}) \\ d_1(m + \hat{1})  + d_2(m + \hat{1}) ) \right] \\
+       & \hspace{15 mm} - \frac{1}{2} \Gamma_0 - \frac{1}{2}\Gamma_1
+        \end{split}
+\end{equation*}
+with:
+\begin{equation*}
+    \begin{split}
+       \Gamma_0 = & \left( \left[ (1 - \gamma_0) U_0(m) \delta_{p, m+\hat{0}} + (1 + \gamma_0) U_0^\dagger (m - \hat{0}) \delta_{p, m - \hat{0}} \right]\right) \cdot \\
+       & \cdot \left( \Bar{m} d(p) - \frac{1}{2}\left[ (1 - \gamma_0) U_0^\dagger(p - \hat{0}) d(p-\hat{0}) + (1 + \gamma_0) U_0 (p) d(p+\hat{0}) \right] - \right. \\ 
+       & \left. - \frac{1}{2}\left[ (1 - \gamma_1) U_1^\dagger(p - \hat{1}) d(p-\hat{1}) + (1 + \gamma_1) U_1 (p) d(p+\hat{1}) \right] \right) = \\
+       = & \, \Bar{m} \left[ U_0(m)(1 - \gamma_0) d(m+\hat{0}) + U_0^{\dagger}(m - \hat{0}) (1 + \gamma_0) d(m-\hat{0}) \right] + \\
+       & - \frac{1}{2} \left[ 2(1 - \gamma_0) U_0(m)U_0^\dagger(m) d(m) + 2(1 + \gamma_0) U_0^\dagger(m-\hat{0}) U_0(m - \hat{0}) d(m) \right] - \\
+       & - \frac{1}{2}\left[ (1-\gamma_0)(1-\gamma_1) U_0(m)U_1^\dagger(m+\hat{0}-\hat{1}) d(m+\hat{0} - \hat{1}) + \right. \\ 
+       & + (1-\gamma_0)(1 + \gamma_1) U_0(m)U_1(m+\hat{0})d(m+\hat{0}+\hat{1}) +  \\ 
+       & + (1+\gamma_0)(1-\gamma_1)U_0^\dagger(m-\hat{0}) U_1^\dagger(m - \hat{0} - \hat{1}) d(m - \hat{0} - \hat{1}) + \\ 
+       & + \left. (1+\gamma_0)(1+\gamma_1)U_0^\dagger(m-\hat{0}) U_1(m-\hat{0}) d(m - \hat{0} + \hat{1}) \right]
+    \end{split}
+\end{equation*}
+And analogously: 
+\begin{equation*}
+    \begin{split}
+        \Gamma_1 = & \left( \left[ (1 - \gamma_1) U_1(m) \delta_{p, m+\hat{1}} + (1 + \gamma_1) U_1^\dagger (m - \hat{1}) \delta_{p, m - \hat{1}} \right]\right) \cdot \\
+       & \cdot \left( \Bar{m} d(p) - \frac{1}{2}\left[ (1 - \gamma_0) U_0^\dagger(p - \hat{0}) d(p-\hat{0}) + (1 + \gamma_0) U_0 (p) d(p+\hat{0}) \right] - \right. \\ 
+       & \left. - \frac{1}{2}\left[ (1 - \gamma_1) U_1^\dagger(p - \hat{1}) d(p-\hat{1}) + (1 + \gamma_1) U_1 (p) d(p+\hat{1}) \right] \right)
+    \end{split}
+\end{equation*}
+Writing explicitly the contraction with the $\gamma$-matrices, we can prove that the components of $\zeta (m) = (DD^\dagger)(m,n) \, d(n)$ are:
+\begin{equation*}
+    \begin{split}
+     \zeta_1(m) &= (\Bar{m}^2 + 2) d_1 (m) - \\
+     & - \Bar{m} \left[ U_0^\dagger(m - \hat{0}) d_1(m - \hat{0}) + U_1^\dagger(m - \hat{1}) d_1(m-\hat{1}) + \right. \\ 
+     & \hspace{40 mm} \left. + U_1(m) d_1(m + \hat{1}) + U_0 (m) d_1(m + \hat{0})  \right] + \\
+     & + U_0 (m) \left[ U_1^\dagger(m + \hat{0} - \hat{1}) d_-(m + \hat{0} - \hat{1}) + U_1(m + \hat{0}) d_+(m + \hat{0} + \hat{1}) \right] + \\ 
+     & + \frac{1}{2} U_1 (m) \left[ U_0^\dagger(m + \hat{1} - \hat{0}) d_1(m + \hat{1} - \hat{0}) - U_0(m + \hat{1}) d_2(m + \hat{1} + \hat{0}) \right] +  \\ 
+     & + \frac{1}{2} U_1^\dagger (m - \hat{1}) \left[ U_0^\dagger(m - \hat{1} - \hat{0}) d_1(m - \hat{1} - \hat{0}) + U_0(m - \hat{1}) d_2(m - \hat{1} + \hat{0}) \right] \\ 
+    \end{split}
+\end{equation*}
+and: 
+\begin{equation*}
+    \begin{split}
+     \zeta_2(m) &= (\Bar{m}^2 + 2) d_2(m) - \\
+     & - \Bar{m} \left[ U_0^\dagger(m - \hat{0}) d_2(m - \hat{0}) + U_1^\dagger(m - \hat{1}) d_2(m-\hat{1}) + \right. \\ 
+     & \hspace{40mm} \left. + U_1(m) d_2(m + \hat{1}) + U_0 (m) d_2(m + \hat{0}) \right] + \\
+     & + U_0^\dagger (m - \hat{0}) \left[ - U_1^\dagger(m - \hat{0} - \hat{1}) d_-(m - \hat{0} - \hat{1}) + U_1(m - \hat{0}) d_+(m - \hat{0} + \hat{1}) \right] +  \\ 
+     & + \frac{1}{2} U_1 (m) \left[ -U_0^\dagger(m + \hat{1} - \hat{0}) d_1(m + \hat{1} - \hat{0}) + U_0(m + \hat{1}) d_2(m + \hat{1} + \hat{0}) \right] +  \\ 
+     & + \frac{1}{2} U_1^\dagger (m - \hat{1}) \left[ U_0^\dagger(m - \hat{1} - \hat{0}) d_1(m - \hat{1} - \hat{0}) + U_0(m - \hat{1}) d_2(m - \hat{1} + \hat{0}) \right] +  \\ 
+    \end{split}
+\end{equation*}
+where
+\begin{equation*}
+    d_-(k) = \frac{d_1 (k) - d_2(k)}{2} \,\,\,\,\,\,\,\,\,\,\, d_+(k) = \frac{d_1 (k) + d_2 (k)}{2}
+\end{equation*}

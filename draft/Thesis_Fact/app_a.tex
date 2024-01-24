@@ -1,0 +1,77 @@
+\chapter{Detailed Balance Condition}
+\label{app:a}
+Here we will briefly show that the HMC algorithm satisfies the detailed balance condition\footnote{The proof follows closely what is reported in \cite{Gattringer:2010zz}.}:
+\begin{equation}
+    T(U'|U) P(U) = T(U|U') P(U')
+\end{equation}
+Recall that the algorithm embeds two steps: the MD evolution scheme, which offers the proposal for the new configuration, and the accept/reject step. From the first step, we get the value of the transition probability $T(U'|U)$, so we will first focus on the leapfrog evolution scheme. In order to obey the detailed balance condition, a MD trajectory must meet the following requirements:
+\begin{itemize}
+    \item Area preservation of the integration measure $\mathcal{D}[Q]\mathcal{D}[\pi]$ during the MD evolution;
+    \item The trajectory must be \textit{reversible}, hence given two configurations $(\pi,Q)$ and $(\pi', Q')$, we must have $T_{md}(\pi', Q' | \pi, Q) = T_{md}(-\pi, Q| -\pi', Q')$.
+\end{itemize}
+We want to prove that the leapfrog integration scheme shown above satisfies those conditions. Consider a single evolution step, from Eqs. (\ref{first step pi})-(\ref{first step Q}):
+\begin{equation}\label{evolution step}
+    \begin{split}
+    & \hspace{25mm} Q_0(x) \to Q_1(x) = Q_0(x) + \pi_{\frac{1}{2}}(x) \varepsilon \\
+       & \pi_{0}(x) \to \pi_{\frac{1}{2}}(x) =  \pi_{0}(x) - \left. \pdv{S}{Q(x)} \right\rvert_{Q_{0}} \frac{\varepsilon}{2} \to \pi_{1}(x) = \pi_{\frac{1}{2}}(x) - \left. \pdv{S}{Q(x)} \right\rvert_{Q_{1}} \frac{\varepsilon}{2} 
+    \end{split}
+\end{equation}
+where the subscripts label the time steps in units of $\varepsilon$. Area preservation of the measure of integration follows from the fact that the Jacobian associated to this evolution is equal to the identity, indeed:
+\begin{equation}
+    \det[\frac{\partial(\pi_1, Q_1)}{\partial(\pi_0, Q_0)}] = \det[\frac{\partial(\pi_1, Q_1)}{\partial(\pi_{\frac{1}{2}}, Q_1)}\frac{\partial(\pi_{\frac{1}{2}}, Q_1)}{\partial(\pi_{\frac{1}{2}}, Q_0)}\frac{\partial(\pi_{\frac{1}{2}}, Q_0)}{\partial(\pi_0, Q_0)}]
+\end{equation}
+Clearly the right-hand side factorizes into three determinants of triangular matrices, e.g.:
+\begin{equation}
+    \det[\frac{\partial(\pi_{\frac{1}{2}}, Q_0)}{\partial(\pi_0, Q_0)}] = \det\begin{bmatrix}
+\,1 & \dots \\
+\,0 & 1 
+\end{bmatrix} = 1
+\end{equation}
+Hence the total Jacobian will be equal to 1, and the integration measure is invariant.
+\\ For what concerns reversibility, consider a forward step from $(\pi_0, Q_0) \to (\pi_1, Q_1)$, combining the expressions in (\ref{evolution step}) we obtain:
+\begin{equation}\label{step final app}
+    \begin{split}
+    & Q_1(x) = Q_0(x) + \pi_0(x) \varepsilon - \frac{1}{2} \left. \pdv{S}{Q(x)} \right\rvert_{Q_{0}} \varepsilon^2 \\
+       & \pi_{1}(x) = \pi_{0}(x) - \frac{1}{2}\left( \left. \pdv{S}{Q(x)} \right\rvert_{Q_{0}} + \left. \pdv{S}{Q(x)} \right\rvert_{Q_{1}} \right) \varepsilon
+    \end{split}
+\end{equation}
+Conversely, if we start at $(\pi_1, Q_1)$ and apply (\ref{evolution step}) with a negative step size $-\varepsilon$, we get a backward step:
+\begin{equation}
+    \begin{split}
+           & Q_1(x) \to Q_1(x) - \pi_1(x) \varepsilon - \frac{1}{2} \left. \pdv{S}{Q(x)} \right\rvert_{Q_{1}} \varepsilon^2 = \\
+           & \hspace{10mm} = Q_1(x) - \pi_0(x) \varepsilon + \frac{1}{2}\left( \left. \pdv{S}{Q(x)} \right\rvert_{Q_{0}} + \left. \pdv{S}{Q(x)} \right\rvert_{Q_{1}} \right)  -  \frac{1}{2} \left. \pdv{S}{Q(x)} \right\rvert_{Q_{1}} \varepsilon^2 = \\
+           & \hspace{10mm} = Q_1(x) - \pi_0(x) \varepsilon + \frac{1}{2} \left. \pdv{S}{Q(x)} \right\rvert_{Q_{0}} \varepsilon^2 = Q_0(x)  \\
+        & \pi_1(x) \to \pi_{1}(x) + \frac{1}{2}\left( \left. \pdv{S}{Q(x)} \right\rvert_{Q_{0}} + \left. \pdv{S}{Q(x)} \right\rvert_{Q_{1}} \right) \varepsilon = \pi_0(x)
+    \end{split}
+\end{equation}
+so we get $(\pi_1, Q_1) \to (\pi_0, Q_0)$, hence reversibility is guaranteed. In the equations of motion, time always multiplies the momenta, so that in the evolution we have indeed $T_{md}(\pi', Q' | \pi, Q) = T_{md}(-\pi, Q| -\pi', Q')$, or equivalently, since $\pi$ enters quadratically in the distributions, $T_{md}(\pi', Q' | \pi, Q) = T_{md}(\pi, Q| \pi', Q')$.
+\\ Once that the new configuration has been proposed, since the MD evolution scheme is correct up to $\mathcal{O}(\varepsilon^2)$ discretization errors, we complete the trajectory with a Metropolis step, hence the proposal is accepted only with a probability factor:
+\begin{equation}
+    T_A(\pi', Q'| \pi, Q) = \min\left(1, \frac{\exp(-H[\pi', Q'])}{\exp(-H[\pi, Q])}\right)
+\end{equation}
+where $H[\pi, Q] = \frac{\pi^2}{2} + S[Q]$, and this step must satisfy detailed balance. The total probability of transitioning from $Q$ to $Q'$ results from integrating over all momenta:
+\begin{equation}\label{T}
+    T(Q'|Q) = \int \mathcal{D}[\pi] \mathcal{D}[\pi'] T_A(\pi', Q'|\pi, Q) T_{md} (\pi', Q'| \pi, Q) e^{-\pi^2/2}
+\end{equation}
+Then we can transform:
+\begin{equation}\label{T_A}
+    \begin{split}
+        T_A(\pi', Q'| \pi, Q) & = \min\left(1, \frac{e^{-\pi'^2/2 - S[Q']}}{e^{-\pi^2/2 - S[Q]}} \right) = \\
+        & = \exp(-\frac{\pi'^2}{2} - S[Q'] + \frac{\pi^2}{2} + S[Q]) \min\left(\frac{e^{-\pi^2/2 - S[Q]}}{e^{-\pi'^2/2 - S[Q']}}, 1 \right) = \\ 
+        & = \exp(-\frac{\pi'^2}{2} - S[Q'] + \frac{\pi^2}{2} + S[Q]) T_A(\pi, Q!\pi', Q') = \\
+        & = \exp(-\frac{\pi'^2}{2} - S[Q'] + \frac{\pi^2}{2} + S[Q]) T_A(-\pi, Q|-\pi', Q')
+    \end{split}
+\end{equation}
+where we used that $T_A$ is even in the momenta in the last step. By using the reversibility of the leapfrog evolution scheme shown above and plugging (\ref{T_A}) into (\ref{T}), the integral becomes:
+\begin{equation}
+    \begin{split}
+        T(Q'|Q) &= \int \mathcal{D}[\pi] \mathcal{D}[\pi'] T_A(-\pi, Q|-\pi', Q') T_{md} (-\pi, Q| -\pi', Q') e^{-S[Q'] + S[Q] -\pi'^2/2} \\ 
+        &= \int \mathcal{D}[\pi] \mathcal{D}[\pi'] T_A(\pi, Q|\pi', Q') T_{md} (\pi, Q| \pi', Q') e^{-S[Q'] + S[Q] -\pi'^2/2}
+    \end{split}
+\end{equation}
+where in the second step we changed the sign of all momenta, as the integration measure is invariant under such transformation.
+\\ Finally, if we multiply the above expression with $\exp(-S[Q])$ and compare it with (\ref{T}), it is clear that:
+\begin{equation}
+    \exp(-S[Q]) T(Q'|Q) = \exp(-S[Q']) T(Q|Q')
+\end{equation}
+which corresponds to the detailed balance condition for the distribution probability of interest. 
